@@ -19,7 +19,7 @@ MEMES_SORT_HASH = {'views':'?sort=views', 'comments':'?sort=comments'}
 # For example, https://knowyourmeme.com/memes/popular/page/1?sort=views
 
 PHOTOS_HASH = {'trending':'https://knowyourmeme.com/photos/trending/page/',
-                'most-commented':'https://knowyourmeme.com/photos/most-commented/page'}
+                'most-commented':'https://knowyourmeme.com/photos/most-commented/page/'}
 # MEMES_HASH : a set of directories
 # append a positive integer to get the corresponding page number
 # For example, https://knowyourmeme.com/memes/trending/page/1 will be the page.
