@@ -1,6 +1,8 @@
 # TODO
 # 1. Refactor __init__() DONE
-# 2. Add checking url
+# 2. Add checking url DONE
+# 3. Add attribute 'Example urls'
+# 4. Add method to download example images
 
 import urllib3
 import bs4
