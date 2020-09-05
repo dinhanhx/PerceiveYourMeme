@@ -74,16 +74,21 @@ class MemePage():
         # Download images
         # then name them corresponding to self.basic_info_dict['Name']
         # Use attributes self.org_img_urls
-        http = urllib3.PoolManager()
-        i = 0
-        for org_img_url in self.org_img_urls:
-            response = http.request('GET', org_img_url, HEADERS)
-            file_type = org_img_url.split('.')[-1].split('?')[0]
-            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name'] + ' ' + str(i)
-            with open(fname_path+'.'+file_type, 'wb') as f:
-                f.write(response.data)
+        if len(self.org_img_urls) > 0:
+            http = urllib3.PoolManager()
+            i = 0
+            for org_img_url in self.org_img_urls:
+                response = http.request('GET', org_img_url, HEADERS)
+                file_type = org_img_url.split('.')[-1].split('?')[0]
+                fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name'] + ' ' + str(i)
+                with open(fname_path+'.'+file_type, 'wb') as f:
+                    f.write(response.data)
 
-            i += 1
+                i += 1
+
+
+        else:
+            print('Org img urls are blank')
 
 
 if __name__ == '__main__':

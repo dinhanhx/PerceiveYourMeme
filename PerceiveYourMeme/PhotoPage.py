@@ -57,12 +57,16 @@ class PhotoPage():
         # Download photo
         # then name them corresponding to self.basic_info_dict['Name']
         # Use attributes self.dir_photo_url
-        http = urllib3.PoolManager()
-        response = http.request('GET', self.dir_photo_url, headers=HEADERS)
-        file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
-        fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
-        with open(fname_path+'.'+file_type, 'wb') as f:
-            f.write(response.data)
+        if type(self.dir_photo_url) == type(' '):
+            http = urllib3.PoolManager()
+            response = http.request('GET', self.dir_photo_url, headers=HEADERS)
+            file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
+            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
+            with open(fname_path+'.'+file_type, 'wb') as f:
+                f.write(response.data)
+
+        else:
+            print('Dir photo url is missing or invalid')
 
 
 if __name__ == '__main__':
