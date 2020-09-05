@@ -79,7 +79,7 @@ class MemePage():
         for org_img_url in self.org_img_urls:
             response = http.request('GET', org_img_url, HEADERS)
             file_type = org_img_url.split('.')[-1].split('?')[0]
-            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name'] + str(i)
+            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name'] + ' ' + str(i)
             with open(fname_path+'.'+file_type, 'wb') as f:
                 f.write(response.data)
 
