@@ -72,4 +72,4 @@ class PhotoPage():
 if __name__ == '__main__':
     UzakiTsuki = PhotoPage('https://knowyourmeme.com/photos/1891689-uzaki-chan-wants-to-hang-out')
     UzakiTsuki.pprint()
-    # UzakiTsuki.download_photo()
+    UzakiTsuki.download_photo()
