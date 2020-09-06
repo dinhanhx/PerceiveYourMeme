@@ -71,4 +71,4 @@ class NewsPage():
 if __name__ == '__main__':
     random_news = NewsPage('https://news.knowyourmeme.com/news/mia-khalifa-is-auctioning-iconic-porn-glasses-to-raise-money-for-beirut')
     random_news.pprint()
-    random_news.download_head_img()
+    # random_news.download_head_img()
