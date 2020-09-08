@@ -26,6 +26,11 @@ PHOTOS_HASH = {'trending':'https://knowyourmeme.com/photos/trending/page/',
 
 HEADERS = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36 Edg/85.0.564.44'}
 # User-Agent headers
+# This HEADERS can be achived by going to this link
+# https://www.whatismybrowser.com/detect/what-is-my-user-agent
+# If you are smart and have time, https://developers.whatismybrowser.com/api/
 
 DEFAULT_DOWNLOAD_PATH = ''
 # Define default download path
+# This depends on OS
+# If you are smart and have time, https://stackoverflow.com/questions/35851281/python-finding-the-users-downloads-folder 
