@@ -45,7 +45,14 @@ class MemePage():
             basic_info_dict['Unit'] = basic_info[0]
             basic_info_dict['Status'] = basic_info[2]
             basic_info_dict['Type'] = basic_info[4]
-            basic_info_dict['Year'] = basic_info[6]
+
+            # NSFW stuff handler
+            if basic_info[6] == 'NSFW':
+                basic_info_dict['Badge'] = basic_info[6]
+                basic_info_dict['Year'] = basic_info[8]
+            else:
+                basic_info_dict['Badge'] = 'SFW'
+                basic_info_dict['Year'] = basic_info[6]
 
             basic_info_dict['Tags'] = entry_tags[1]
 
