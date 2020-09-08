@@ -60,10 +60,14 @@ class PhotoPage():
         if type(self.dir_photo_url) == type(' '):
             http = urllib3.PoolManager()
             response = http.request('GET', self.dir_photo_url, headers=HEADERS)
-            file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
-            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
-            with open(fname_path+'.'+file_type, 'wb') as f:
-                f.write(response.data)
+            if response.status == 200:
+                file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
+                fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
+                with open(fname_path+'.'+file_type, 'wb') as f:
+                    f.write(response.data)
+
+            else:
+                print('Dir photo url is missing or invalid')
 
         else:
             print('Dir photo url is missing or invalid')
