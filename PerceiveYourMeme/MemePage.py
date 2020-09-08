@@ -96,6 +96,18 @@ class MemePage():
 
         else:
             print('Org img urls are blank')
+            # If this message shows up,
+            # it means that YOU have to add these url manually
+            # Use method set_org_img_urls()
+
+    def set_org_img_urls(self, url_list):
+        # To change and update
+        # attributes self.org_img_urls
+        self.org_img_urls = url_list
+        self.basic_info_dict['Template urls'] = self.org_img_urls
+
+    def get_org_img_urls(self):
+        return self.org_img_urls
 
 
 if __name__ == '__main__':
