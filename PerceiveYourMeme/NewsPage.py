@@ -60,10 +60,14 @@ class NewsPage():
         if type(self.head_img_url) == type(' '):
             http = urllib3.PoolManager()
             response = http.request('GET', self.head_img_url, headers=HEADERS)
-            file_type = self.head_img_url.split('.')[-1].split('?')[0]
-            fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Heading']
-            with open(fname_path+'.'+file_type, 'wb') as f:
-                f.write(response.data)
+            if response.status == 200:
+                file_type = self.head_img_url.split('.')[-1].split('?')[0]
+                fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Heading']
+                with open(fname_path+'.'+file_type, 'wb') as f:
+                    f.write(response.data)
+
+            else:
+                print('Head img url is missing or invalid')
 
         else:
             print('Head img url is missing or invalid')
