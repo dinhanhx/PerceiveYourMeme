@@ -7,14 +7,17 @@ def url_maker(context, page_index, query, sort):
 
 class SearchEntry():
     def __init__(self, max_pages = 1, query, sort = 'relevance'):
+        # <table class="entry_list">
         pass
 
 class SearchImage():
     def __init__(self, max_pages = 1, query, sort = 'relevance'):
+        # <div id="photo_gallery">
         pass
 
 class SearchNews():
     def __init__(self, max_pages = 1, query, sort = 'relevance'):
+        # <div id="news-posts">
         pass
 
 class SearchEngine():
