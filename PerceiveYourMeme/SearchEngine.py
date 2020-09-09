@@ -26,7 +26,12 @@ class SearchEntry():
         for page_index in range(1, self.max_pages+1):
             url = url_maker('entries', page_index, self.query, self.sort)
             response = http.request('GET', url, headers=HEADERS)
-            tag_a_list = bs4.BeautifulSoup(response.data, 'html.parser').find('table', attrs={'class':'entry_list'}).find_all('a', attrs={'class':'photo'})
+            soup = bs4.BeautifulSoup(response.data, 'html.parser')
+
+            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+                break
+
+            tag_a_list = soup.find('table', attrs={'class':'entry_list'}).find_all('a', attrs={'class':'photo'})
             url_list = [KYM+tag_a['href'] for tag_a in tag_a_list]
             MemePageList.append([MemePage(u_r_l) for u_r_l in url_list])
 
@@ -53,7 +58,12 @@ class SearchImage():
         for page_index in range(1, self.max_pages+1):
             url = url_maker('images', page_index, self.query, self.sort)
             response = http.request('GET', url, headers=HEADERS)
-            tag_a_list = bs4.BeautifulSoup(response.data, 'html.parser').find('div', attrs={'id':'photo_gallery'}).find_all('a', attrs={'class':'photo'})
+            soup = bs4.BeautifulSoup(response.data, 'html.parser')
+
+            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+                break
+
+            tag_a_list = soup.find('div', attrs={'id':'photo_gallery'}).find_all('a', attrs={'class':'photo'})
             url_list = [KYM+tag_a['href'] for tag_a in tag_a_list]
             PhotoPageList.append([PhotoPage(u_r_l) for u_r_l in url_list])
 
@@ -79,6 +89,10 @@ class SearchNews():
             url = url_maker('news', page_index, self.query, self.sort)
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
+
+            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+                break
+
             url_list = ['https:'+h1.find('a')['href'] for h1 in soup.find('div', attrs={"id":"entries"}).find_all('div')[1].find_all('h1')]
             url_list = [u_r_l.replace(':443', '') for u_r_l in url_list]
             print(url_list)
