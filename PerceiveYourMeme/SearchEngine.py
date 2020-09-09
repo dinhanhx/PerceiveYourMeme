@@ -6,7 +6,7 @@ from PhotoPage import PhotoPage
 from NewsPage import NewsPage
 
 def url_maker(context, page_index, query, sort):
-    return 'https://knowyourmeme.com/search?context=' + context + '&page=' + str(page_index) + '&q=' + query + '&sort=' + sort
+    return KYM+'/search?context=' + context + '&page=' + str(page_index) + '&q=' + query + '&sort=' + sort
 
 class SearchEntry():
     def __init__(self, query, max_pages = 1, sort = 'relevance'):
