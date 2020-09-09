@@ -1,4 +1,5 @@
 # KYM : Known Your Meme
+KYM = 'https://knowyourmeme.com'
 
 KYM_HASH = {'memes':'https://knowyourmeme.com/memes/page/',
             'photos':'https://knowyourmeme.com/photos/page/',
@@ -33,4 +34,4 @@ HEADERS = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5
 DEFAULT_DOWNLOAD_PATH = ''
 # Define default download path
 # This depends on OS
-# If you are smart and have time, https://stackoverflow.com/questions/35851281/python-finding-the-users-downloads-folder 
+# If you are smart and have time, https://stackoverflow.com/questions/35851281/python-finding-the-users-downloads-folder
