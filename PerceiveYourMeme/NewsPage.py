@@ -29,12 +29,12 @@ class NewsPage():
 
             # Get the super_header information
             super_header = soup.find('div', attrs={'id':'super-header'})
-            basic_info_dict['Heading'] = super_header.find('h1').text
-            basic_info_dict['Timestamp'] = super_header.find('span', attrs={'class':'header-timestamp'}).text
+            basic_info_dict['Heading'] = super_header.find('h1').text[1:-1]
+            basic_info_dict['Timestamp'] = super_header.find('span', attrs={'class':'header-timestamp'}).text[1:-1]
             basic_info_dict['Author'] = super_header.find('p', attrs={'class':'header-timestamp'}).find('a').text
 
             # Get the heading img
-            self.head_img_url = soup.find('div', attrs={'id':'maru'}).find('img', attrs={'class':'news-post-header-image caption'})['data-src']
+            self.head_img_url = soup.find('div', attrs={'id':'maru'}).find('img', attrs={'class':'news-post-header-image'})['data-src']
 
             # Store url to basic_info_dict
             basic_info_dict['Head image url'] = self.head_img_url
