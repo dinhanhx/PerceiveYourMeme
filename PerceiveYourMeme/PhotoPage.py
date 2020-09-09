@@ -62,7 +62,13 @@ class PhotoPage():
             response = http.request('GET', self.dir_photo_url, headers=HEADERS)
             if response.status == 200:
                 file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
-                fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
+                
+                fname_path = ''
+                if self.basic_info_dict['Name'] == '':
+                    fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Id']
+                else:
+                    fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
+
                 with open(fname_path+'.'+file_type, 'wb') as f:
                     f.write(response.data)
 
