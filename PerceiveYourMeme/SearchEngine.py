@@ -28,7 +28,7 @@ class SearchEntry():
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
-            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+            if soup.find('div', attrs={'id':'entries'}).find('h3') is not None:
                 break
 
             tag_a_list = soup.find('table', attrs={'class':'entry_list'}).find_all('a', attrs={'class':'photo'})
@@ -60,7 +60,7 @@ class SearchImage():
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
-            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+            if soup.find('div', attrs={'id':'entries'}).find('h3') is not None:
                 break
 
             tag_a_list = soup.find('div', attrs={'id':'photo_gallery'}).find_all('a', attrs={'class':'photo'})
@@ -90,7 +90,7 @@ class SearchNews():
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
-            if 'Sorry' in soup.find('div', attrs={'class': 'entries'}).find('h3').text:
+            if soup.find('div', attrs={'id':'entries'}).find('h3') is not None:
                 break
 
             url_list = ['https:'+h1.find('a')['href'] for h1 in soup.find('div', attrs={"id":"entries"}).find_all('div')[1].find_all('h1')]
