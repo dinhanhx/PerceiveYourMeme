@@ -1,6 +1,6 @@
 import urllib3
 import bs4
-from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
 def isValid(url):
     if 'https://knowyourmeme.com/photos/' in url:
@@ -62,7 +62,7 @@ class PhotoPage():
             response = http.request('GET', self.dir_photo_url, headers=HEADERS)
             if response.status == 200:
                 file_type = self.dir_photo_url.split('.')[-1].split('?')[0]
-                
+
                 fname_path = ''
                 if self.basic_info_dict['Name'] == '':
                     fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Id']

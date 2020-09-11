@@ -1,6 +1,6 @@
 import urllib3
 import bs4
-from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
 def isValid(url):
     if 'https://news.knowyourmeme.com/news' in url:

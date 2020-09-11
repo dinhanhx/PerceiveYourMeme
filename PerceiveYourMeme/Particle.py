@@ -1,6 +1,6 @@
 # An easter egg
 import urllib3
-from CONST import HEADERS
+from .CONST import HEADERS
 from PIL import Image
 from io import BytesIO
 

@@ -1,9 +1,9 @@
 import urllib3
 import bs4
-from CONST import HEADERS, KYM
-from MemePage import MemePage
-from PhotoPage import PhotoPage
-from NewsPage import NewsPage
+from .CONST import HEADERS, KYM
+from .MemePage import MemePage
+from .PhotoPage import PhotoPage
+from .NewsPage import NewsPage
 
 def url_maker(context, page_index, query, sort):
     return KYM+'/search?context=' + context + '&page=' + str(page_index) + '&q=' + query + '&sort=' + sort
