@@ -35,4 +35,11 @@ Clone this repository and run this command at root
 
 ## How to use this library?
 
-Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so I will treat this part as documentation.
+Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so please checkout `DOCUMENTATION.md`
+
+## What are applications of this library?
+- For archiving memes data from KnowYourMeme (Obviously)
+- For building dataset for memes detection such as [Memes Detection Android App using Deep Learning](https://medium.com/datadriveninvestor/memes-detection-android-app-using-deep-learning-d2c65347e6f3) or [Hateful Memes Challenge and data set for research on harmful multimodal content](https://ai.facebook.com/blog/hateful-memes-challenge-and-data-set/)
+- For entertaining purposes such as a discord meme bot (TBH Reddit is still better source for getting memes)
+
+If you use this library for different purposes from mentioned one, it is recommended to add your purposes and links to your project to this section.
