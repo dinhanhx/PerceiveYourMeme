@@ -6,6 +6,8 @@ import urllib3
 import bs4
 from .CONST import *
 from .NewsPage import NewsPage
+from .PhotoPage import PhotoPage
+from .MemePage import MemePage
 
 def get_soup(url):
     http = urllib3.PoolManager()
@@ -13,16 +15,17 @@ def get_soup(url):
     soup = bs4.BeautifulSoup(response.data, 'html.parser')
     return soup
 
-def get_memes(directory = None, page_index = 1, sort = ''):
-    # directory : None or 'popular' or 'submissions'
+def get_memes(directory = '', page_index = 1, sort = ''):
+    # directory : '' or 'popular' or 'submissions'
     # page_index : a positive integer
+    # sort : '' or 'views' or 'comments'
     # To return a list of MemePage objects
     url = ''
 
     if page_index < 1:
         page_index = 1
 
-    if directory is None:
+    if directory == '':
         url = KYM_HASH['memes'] + str(page_index) + MEMES_SORT_HASH[sort]
     else:
         if directory in ['popular', 'submissions']:
@@ -38,8 +41,8 @@ def get_memes(directory = None, page_index = 1, sort = ''):
 
     return [MemePage(u_r_l) for u_r_l in url_list]
 
-def get_photos(directory = None, page_index = 1):
-    # directory : None or 'trending' or 'most-commented'
+def get_photos(directory = '', page_index = 1):
+    # directory : '' or 'trending' or 'most-commented'
     # page_index : a positive integer
     # To return a list of PhotoPage objects
     url = ''
@@ -47,7 +50,7 @@ def get_photos(directory = None, page_index = 1):
     if page_index < 1:
         page_index = 1
 
-    if directory is None:
+    if directory == '':
         url = KYM_HASH['photos'] + str(page_index)
     else:
         if directory in ['trending', 'most-commented']:
