@@ -14,7 +14,7 @@ MEMES_HASH = {'popular':'https://knowyourmeme.com/memes/popular/page/',
 # append a positive integer to get the corresponding page number
 # For example, https://knowyourmeme.com/memes/popular/page/1 will be the page.
 
-MEMES_SORT_HASH = {'views':'?sort=views', 'comments':'?sort=comments'}
+MEMES_SORT_HASH = {'views':'?sort=views', 'comments':'?sort=comments', '':''}
 # MEMES_SORT_HASH : a set of sorting methods
 # append sort method to MEMES_HASH or KYM_HASH['memes'] to get sort
 # For example, https://knowyourmeme.com/memes/popular/page/1?sort=views
