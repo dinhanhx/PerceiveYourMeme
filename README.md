@@ -43,3 +43,20 @@ Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so p
 - For entertaining purposes such as a discord meme bot (TBH Reddit is still better source for getting memes)
 
 If you use this library for different purposes from mentioned one, it is recommended to add your purposes and links to your project to this section.
+
+## Ascii art
+```
+.,;;,,,,,'.                   .;cc'         .:c:.        
+.::.   ..,:,.                 .cllc.       .:lll.        
+.:;.     .;c. .'.       .''.  .c:;c:.     .;c,:l'        
+.:;.     .::. ;OO;     ,kKO;  'l:.,l;     ,l,.;o,        
+.::.....':;.   l0x.   .d00l.  'o; .:l'   .c:. ,o;        
+.:c;,,,,'.     .o0o.  c0d;.   ,o,  .lc. .:c.  'o:.       
+.:;.            .x0c.,Ok'     ;o'   ,l;.,l'   'l:.       
+.:;.             ,kkcdO;     .:l'   .:l:c;    .lc.       
+.::.              ;OK0c      .cl.    .loc.    .cl.       
+.'.               .xKo.      .''.     .'.      ',.       
+'dOl.                                   
+,oOk:.                                    
+.:l,.                                      
+```
