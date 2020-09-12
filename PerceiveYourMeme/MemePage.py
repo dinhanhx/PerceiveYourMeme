@@ -57,7 +57,9 @@ class MemePage():
             basic_info_dict['Tags'] = entry_tags[1]
 
             # Get url of template
-            self.org_img_urls = [ele['data-src'] for ele in entry_body.find('center').find_all('img')]
+            self.org_img_urls = []
+            if entry_body.find('center') is not None:
+                self.org_img_urls = [ele['data-src'] for ele in entry_body.find('center').find_all('img')]
 
             # Store url to basic_info_dict
             basic_info_dict['Template urls'] = self.org_img_urls
