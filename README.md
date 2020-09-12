@@ -1,4 +1,4 @@
-# PercieveYourMeme (PyM)
+# PerceiveYourMeme (PyM)
 
 <img src="mics_img/PyM.png" style="width: 25%; height: 25%">
 
@@ -14,7 +14,7 @@ A Python library to scrap from [KnowYourMeme](https://knowyourmeme.com/). Writte
 
 ## How to set up this library?
 
-Before setting up this library, it is recommended to checkout this file `PercieveYourMeme/CONST.py`, there are 2 constants you may want to modify.
+Before setting up this library, it is recommended to checkout this file `PerceiveYourMeme/CONST.py`, there are 2 constants you may want to modify.
 
 ```Python
 HEADERS = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36 Edg/85.0.564.44'}
