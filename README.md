@@ -35,7 +35,7 @@ Clone this repository and run this command at root
 
 ## How to use this library?
 
-Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so please checkout `DOCUMENTATION.md`
+Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so please checkout [`DOCUMENTATION.md`](DOCUMENTATION.md)
 
 ## What are applications of this library?
 - For archiving memes data from KnowYourMeme (Obviously)
