@@ -1,6 +1,6 @@
 # Documentation
 
-A poor documentation of PerceiveYourMeme
+A poor documentation of PerceiveYourMeme. Checkout [`EXAMPLE.py`](EXAMPLE.py) for more examples.
 
 ### Contents
 - [Import](#Import)
