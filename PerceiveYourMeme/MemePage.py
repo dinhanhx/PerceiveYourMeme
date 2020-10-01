@@ -24,48 +24,56 @@ class MemePage():
     # An object to store basic information and template of a meme
     def __init__(self, url):
         if isValid(url):
-            basic_info_dict = {}
+            self.basic_info_dict = {}
             # Store Meme url
-            basic_info_dict['Meme url'] = url
+            self.basic_info_dict['Meme url'] = url
 
             # Name meme
-            basic_info_dict['Name'] = url.split('/')[-1].replace('-', ' ')
+            self.basic_info_dict['Name'] = url.split('/')[-1].replace('-', ' ')
 
             # Get the html document. This can be slow due to the internet
             http = urllib3.PoolManager()
             response = http.request('GET', url, headers=HEADERS)
-            entry_body = bs4.BeautifulSoup(response.data, 'html.parser').find('div', attrs={"class": "c", "id": "entry_body"})
+            soup = bs4.BeautifulSoup(response.data, 'html.parser')
+            try:
+                entry_body = soup.find('div', attrs={"class": "c", "id": "entry_body"})
 
-            # Get basic information and entry tags from entry body
-            basic_info = [ele for ele in entry_body.find('dl').text.split('\n') if ele != '']
-            entry_tags = [ele for ele in
-                        entry_body.find('dl', attrs={"id":"entry_tags"}).text.split('\n') if ele != '']
+                # Get basic information and entry tags from entry body
+                basic_info = [ele for ele in entry_body.find('dl').text.split('\n') if ele != '']
+                entry_tags = [ele for ele in
+                            entry_body.find('dl', attrs={"id":"entry_tags"}).text.split('\n') if ele != '']
 
-            # Then store them
-            basic_info_dict['Unit'] = basic_info[0]
-            basic_info_dict['Status'] = basic_info[2]
-            basic_info_dict['Type'] = basic_info[4]
+                # Then store them
+                self.basic_info_dict['Unit'] = basic_info[0]
+                self.basic_info_dict['Status'] = basic_info[2]
+                self.basic_info_dict['Type'] = basic_info[4]
 
-            # NSFW stuff handler
-            if basic_info[6] == 'NSFW':
-                basic_info_dict['Badge'] = basic_info[6]
-                basic_info_dict['Year'] = basic_info[8]
-            else:
-                basic_info_dict['Badge'] = 'SFW'
-                basic_info_dict['Year'] = basic_info[6]
+                # NSFW stuff handler
+                if basic_info[6] == 'NSFW':
+                    self.basic_info_dict['Badge'] = basic_info[6]
+                    self.basic_info_dict['Year'] = basic_info[8]
+                else:
+                    self.basic_info_dict['Badge'] = 'SFW'
+                    self.basic_info_dict['Year'] = basic_info[6]
 
-            basic_info_dict['Tags'] = entry_tags[1]
+                self.basic_info_dict['Tags'] = entry_tags[1]
 
-            # Get url of template
-            self.org_img_urls = []
-            if entry_body.find('center') is not None:
-                self.org_img_urls = [ele['data-src'] for ele in entry_body.find('center').find_all('img')]
+                # Get url of template
+                self.org_img_urls = []
+                if entry_body.find('center') is not None:
+                    self.org_img_urls = [ele['data-src'] for ele in entry_body.find('center').find_all('img')]
 
-            # Store url to basic_info_dict
-            basic_info_dict['Template urls'] = self.org_img_urls
-
-            # Store basic information
-            self.basic_info_dict = basic_info_dict
+                # Store url to basic_info_dict
+                self.basic_info_dict['Template urls'] = self.org_img_urls
+            except:
+                self.basic_info_dict['Unit'] = ''
+                self.basic_info_dict['Status'] = ''
+                self.basic_info_dict['Type'] = ''
+                self.basic_info_dict['Badge'] = ''
+                self.basic_info_dict['Year'] = ''
+                self.basic_info_dict['Tags'] = ''
+                self.basic_info_dict['Template urls'] = []
+                self.org_img_urls = []
 
         else:
             print('Not a valid url')

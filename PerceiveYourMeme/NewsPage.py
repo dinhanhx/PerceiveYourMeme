@@ -18,29 +18,33 @@ class NewsPage():
     # An object to store a news articles
     def __init__(self, url):
         if isValid(url):
-            basic_info_dict = {}
+            self.basic_info_dict = {}
             # Store News url
-            basic_info_dict['News url'] = url
+            self.basic_info_dict['News url'] = url
 
             # Get the html document. This can be slow due to the internet
             http = urllib3.PoolManager()
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
-            # Get the super_header information
-            super_header = soup.find('div', attrs={'id':'super-header'})
-            basic_info_dict['Heading'] = super_header.find('h1').text[1:-1]
-            basic_info_dict['Timestamp'] = super_header.find('span', attrs={'class':'header-timestamp'}).text[1:-1]
-            basic_info_dict['Author'] = super_header.find('p', attrs={'class':'header-timestamp'}).find('a').text
+            try:
+                # Get the super_header information
+                super_header = soup.find('div', attrs={'id':'super-header'})
+                self.basic_info_dict['Heading'] = super_header.find('h1').text[1:-1]
+                self.basic_info_dict['Timestamp'] = super_header.find('span', attrs={'class':'header-timestamp'}).text[1:-1]
+                self.basic_info_dict['Author'] = super_header.find('p', attrs={'class':'header-timestamp'}).find('a').text
 
-            # Get the heading img
-            self.head_img_url = soup.find('div', attrs={'id':'maru'}).find('img', attrs={'class':'news-post-header-image'})['data-src']
+                # Get the heading img
+                self.head_img_url = soup.find('div', attrs={'id':'maru'}).find('img', attrs={'class':'news-post-header-image'})['data-src']
 
-            # Store url to basic_info_dict
-            basic_info_dict['Head image url'] = self.head_img_url
-
-            # Store basic information
-            self.basic_info_dict = basic_info_dict
+                # Store url to basic_info_dict
+                self.basic_info_dict['Head image url'] = self.head_img_url
+            except:
+                self.basic_info_dict['Heading'] = ''
+                self.basic_info_dict['Timestamp'] = ''
+                self.basic_info_dict['Author'] = ''
+                self.head_img_url = ''
+                self.basic_info_dict['Head image url'] = ''
 
         else:
             print('Not a valid url')

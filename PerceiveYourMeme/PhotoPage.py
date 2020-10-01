@@ -18,29 +18,30 @@ class PhotoPage():
     # An object to store basic detail of a photo and that photo
     def __init__(self, url):
         if isValid(url):
-            basic_info_dict = {}
+            self.basic_info_dict = {}
             # Store Photo url
-            basic_info_dict['Photo url'] = url
+            self.basic_info_dict['Photo url'] = url
 
             # Name photo
             id_name = url.split('/')[-1].replace('-', ' ')
             id_name = id_name.split(' ')
-            basic_info_dict['Id'] = id_name[0]
-            basic_info_dict['Name'] = ' '.join(id_name[1:])
+            self.basic_info_dict['Id'] = id_name[0]
+            self.basic_info_dict['Name'] = ' '.join(id_name[1:])
 
             # Get the html doccument. This can be slow due to the internet
             http = urllib3.PoolManager()
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
-            # Get direct url of photo
-            self.dir_photo_url = soup.find('textarea', attrs={"class":"photo_embed"}).text.replace(' ','').replace('!','')
+            try:
+                # Get direct url of photo
+                self.dir_photo_url = soup.find('textarea', attrs={"class":"photo_embed"}).text.replace(' ','').replace('!','')
 
-            # Store url to basic_info_dict
-            basic_info_dict['Direct photo url'] = self.dir_photo_url
-
-            # Store basic information
-            self.basic_info_dict = basic_info_dict
+                # Store url to basic_info_dict
+                self.basic_info_dict['Direct photo url'] = self.dir_photo_url
+            except:
+                self.dir_photo_url = None
+                self.basic_info_dict['Direct photo url'] = self.dir_photo_url
         else:
             print('Not a valid url')
             self.basic_info_dict = {}
