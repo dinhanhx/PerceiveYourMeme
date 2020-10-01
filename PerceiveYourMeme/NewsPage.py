@@ -61,16 +61,20 @@ class NewsPage():
             http = urllib3.PoolManager()
             response = http.request('GET', self.head_img_url, headers=HEADERS)
             if response.status == 200:
-                file_type = self.head_img_url.split('.')[-1].split('?')[0]
+                file_type = response.headers['Content-Type'].split('/')[-1]
                 fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Heading']
                 with open(fname_path+'.'+file_type, 'wb') as f:
                     f.write(response.data)
 
+                return True
+
             else:
                 print('Head img url is missing or invalid')
+                return False
 
         else:
             print('Head img url is missing or invalid')
+            return False
 
 if __name__ == '__main__':
     random_news = NewsPage('https://news.knowyourmeme.com/news/mia-khalifa-is-auctioning-iconic-porn-glasses-to-raise-money-for-beirut')
