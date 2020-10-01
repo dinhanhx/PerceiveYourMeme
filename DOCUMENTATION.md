@@ -29,7 +29,7 @@ A MemePage object has:
   - Methods
     - `pprint()` : Pretty print of `basic_info_dict`
     - `download_origin_image(custom = DEFAULT_DOWNLOAD_PATH)` : download the images via `org_img_urls` then name them corresponding to `basic_info_dict['Name']`. If `DEFAULT_DOWNLOAD_PATH` is empty, images will be stored in the working-on directory.
-    - `get_org_img_urls()` and `set_org_img_urls()` : to modify and update `org_img_urls` and `basic_info_dict['Template urls']` at the same time. In some cases (rare), you have to specify these urls manually.
+    - `get_org_img_urls()` and `set_org_img_urls()` : to modify and update `org_img_urls` and `basic_info_dict['Template urls']` at the same time. In some cases (rare), you have to specify these urls manually. Return `True` when download successfully else return `False`.
 
 __Example__
 
@@ -59,7 +59,7 @@ A PhotoPage object has:
 
   - Methods
     - `pprint()` : Pretty print of `basic_info_dict`
-    - `download_photo(custom = DEFAULT_DOWNLOAD_PATH)`: download photo via `dir_photo_url` then name it corresponding to `basic_info_dict['Name']`. If `DEFAULT_DOWNLOAD_PATH` is empty, photo will be stored in the working-on directory.
+    - `download_photo(custom = DEFAULT_DOWNLOAD_PATH)`: download photo via `dir_photo_url` then name it corresponding to `basic_info_dict['Name']`. If `DEFAULT_DOWNLOAD_PATH` is empty, photo will be stored in the working-on directory. Return `True` when download successfully else return `False`.
 
 __Example__
 
@@ -83,7 +83,7 @@ A NewsPage object has:
 
   - Methods
     - `pprint()` : Pretty print of `basic_info_dict`
-    - `download_head_img(custom = DEFAULT_DOWNLOAD_PATH)` : download head image via `head_img_url` then name it corresponding to `basic_info_dict['Heading']`. If `DEFAULT_DOWNLOAD_PATH` is empty, image will be stored in the working-on directory.
+    - `download_head_img(custom = DEFAULT_DOWNLOAD_PATH)` : download head image via `head_img_url` then name it corresponding to `basic_info_dict['Heading']`. If `DEFAULT_DOWNLOAD_PATH` is empty, image will be stored in the working-on directory. Return `True` when download successfully else return `False`.
 
 __Example__
 
