@@ -2,6 +2,7 @@ import urllib3
 import bs4
 from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
+
 def isValid(url):
     if 'https://knowyourmeme.com/photos/' in url:
         http = urllib3.PoolManager()
@@ -13,6 +14,7 @@ def isValid(url):
 
     else:
         return False
+
 
 class PhotoPage():
     # An object to store basic detail of a photo and that photo
@@ -35,7 +37,9 @@ class PhotoPage():
 
             try:
                 # Get direct url of photo
-                self.dir_photo_url = soup.find('textarea', attrs={"class":"photo_embed"}).text.replace(' ','').replace('!','')
+                photo = soup.find('textarea', attrs={"class": "photo_embed"})
+                photo = photo.text.replace(' ', '').replace('!', '')
+                self.dir_photo_url = photo
 
                 # Store url to basic_info_dict
                 self.basic_info_dict['Direct photo url'] = self.dir_photo_url
@@ -47,18 +51,16 @@ class PhotoPage():
             self.basic_info_dict = {}
             self.dir_photo_url = None
 
-
     def pprint(self):
         # Pretty print of basic_info_dict
         from json import dumps
         print(dumps(self.basic_info_dict, indent=3))
 
-
-    def download_photo(self, custom_path = DEFAULT_DOWNLOAD_PATH):
+    def download_photo(self, custom_path=DEFAULT_DOWNLOAD_PATH):
         # Download photo
         # then name them corresponding to self.basic_info_dict['Name']
         # Use attributes self.dir_photo_url
-        if type(self.dir_photo_url) == type(' '):
+        if isinstance(self.dir_photo_url, str):
             http = urllib3.PoolManager()
             response = http.request('GET', self.dir_photo_url, headers=HEADERS)
             if response.status == 200:
@@ -66,9 +68,11 @@ class PhotoPage():
 
                 fname_path = ''
                 if self.basic_info_dict['Name'] == '':
-                    fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Id']
+                    fname_path = (DEFAULT_DOWNLOAD_PATH +
+                                  self.basic_info_dict['Id'])
                 else:
-                    fname_path = DEFAULT_DOWNLOAD_PATH + self.basic_info_dict['Name']
+                    fname_path = (DEFAULT_DOWNLOAD_PATH +
+                                  self.basic_info_dict['Name'])
 
                 with open(fname_path+'.'+file_type, 'wb') as f:
                     f.write(response.data)
@@ -85,6 +89,7 @@ class PhotoPage():
 
 
 if __name__ == '__main__':
-    UzakiTsuki = PhotoPage('https://knowyourmeme.com/photos/1891689-uzaki-chan-wants-to-hang-out')
+    ur = 'https://knowyourmeme.com/photos/1891689-uzaki-chan-wants-to-hang-out'
+    UzakiTsuki = PhotoPage(ur)
     UzakiTsuki.pprint()
     # UzakiTsuki.download_photo()
