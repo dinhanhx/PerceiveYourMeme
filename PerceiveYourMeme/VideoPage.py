@@ -34,17 +34,6 @@ class VideoPage():
             http = urllib3.PoolManager()
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
-            # Get direct video url
-            # try:
-            dir_url = soup.find("iframe", attrs={"class": "embedly-embed"})
-            print(dir_url)  
-            # Returns where the document is embedded but I have no idea how to then search inside this document to get the direct url
-
-            #     self.basic_info_dict['Direct url'] = dir_url
-            # except:
-            #     print('No direct video url could be found')
-        else:
-            print('Not a valid url')
 
     def pprint(self):
         """Pretty print of self.basic_info_dict"""
