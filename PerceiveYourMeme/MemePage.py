@@ -1,12 +1,9 @@
-# TODO
-# 1. Refactor __init__() DONE
-# 2. Add checking url DONE
-# 3. Add attribute 'Example urls' GIVEN UP
-# 4. Add method to download example images GIVEN UP
-
 import urllib3
 import bs4
-from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+try:
+    from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+except ImportError:
+    from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
 
 def isValid(url):

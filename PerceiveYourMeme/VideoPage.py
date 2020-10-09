@@ -1,9 +1,9 @@
 import urllib3
 import bs4
-from json import dumps
-
-from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
-
+try:
+    from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+except ImportError:
+    from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
 
 def isValid(url):
@@ -17,7 +17,7 @@ def isValid(url):
 
 class VideoPage():
     """Creates objects to store basic details of a video and that video"""
-    
+
     def __init__(self, url):
         # Contains all basic information about the video
         self.basic_info_dict = {}
@@ -37,10 +37,10 @@ class VideoPage():
 
     def pprint(self):
         """Pretty print of self.basic_info_dict"""
+        from json import dumps
         print(dumps(self.basic_info_dict, indent=3))
-   
+
 
 if __name__ == '__main__':
     western_animation = VideoPage('https://knowyourmeme.com/videos/225020-western-animation')
     western_animation.pprint()
-
