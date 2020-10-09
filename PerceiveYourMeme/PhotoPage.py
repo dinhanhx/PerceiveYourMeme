@@ -2,8 +2,10 @@ import urllib3
 import bs4
 import os
 from json import dumps
-
-from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+try:
+    from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
+except ImportError:
+    from CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 
 
 def isValid(url):
