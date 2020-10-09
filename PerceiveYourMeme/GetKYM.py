@@ -4,10 +4,16 @@
 
 import urllib3
 import bs4
-from .CONST import *
-from .NewsPage import NewsPage
-from .PhotoPage import PhotoPage
-from .MemePage import MemePage
+try:
+    from .CONST import *
+    from .NewsPage import NewsPage
+    from .PhotoPage import PhotoPage
+    from .MemePage import MemePage
+except ImportError:
+    from CONST import *
+    from NewsPage import NewsPage
+    from PhotoPage import PhotoPage
+    from MemePage import MemePage
 
 def get_soup(url):
     http = urllib3.PoolManager()
