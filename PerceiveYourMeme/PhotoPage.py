@@ -1,5 +1,7 @@
 import urllib3
 import bs4
+import os
+from json import dumps
 try:
     from .CONST import HEADERS, DEFAULT_DOWNLOAD_PATH
 except ImportError:
@@ -7,88 +9,76 @@ except ImportError:
 
 
 def isValid(url):
+    """Checks if given url is a valid know your meme photo url"""
+
     if 'https://knowyourmeme.com/photos/' in url:
         http = urllib3.PoolManager()
         response = http.request('GET', url, headers=HEADERS)
-        if response.status == 200:
-            return True
-        else:
-            return False
-
-    else:
-        return False
+        return response.status == 200
+    return False
 
 
 class PhotoPage():
-    # An object to store basic detail of a photo and that photo
+    """Creates an object which stores basic details of a photo and the photo itself"""
+    
     def __init__(self, url):
-        if isValid(url):
-            self.basic_info_dict = {}
-            # Store Photo url
-            self.basic_info_dict['Photo url'] = url
+        self.basic_info_dict = {}
 
-            # Name photo
-            id_name = url.split('/')[-1].replace('-', ' ')
-            id_name = id_name.split(' ')
+        if isValid(url):
+            # Store Photo url
+            self.basic_info_dict['Original url'] = url
+
+            # Get name and id of photo
+            id_name = url.split('/')[-1].split('-')
             self.basic_info_dict['Id'] = id_name[0]
             self.basic_info_dict['Name'] = ' '.join(id_name[1:])
 
-            # Get the html doccument. This can be slow due to the internet
+            # Get soup. Can be slow due to internet speeds
             http = urllib3.PoolManager()
             response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
+            # Get direct url of photo
             try:
-                # Get direct url of photo
                 photo = soup.find('textarea', attrs={"class": "photo_embed"})
                 photo = photo.text.replace(' ', '').replace('!', '')
-                self.dir_photo_url = photo
+                self.basic_info_dict['Direct photo url'] = photo
 
-                # Store url to basic_info_dict
-                self.basic_info_dict['Direct photo url'] = self.dir_photo_url
-            except:
-                self.dir_photo_url = None
-                self.basic_info_dict['Direct photo url'] = self.dir_photo_url
+            except AttributeError:
+                print("No direct url for this photo was found")
+                self.basic_info_dict['Direct photo url'] = None
         else:
             print('Not a valid url')
-            self.basic_info_dict = {}
-            self.dir_photo_url = None
 
     def pprint(self):
-        # Pretty print of basic_info_dict
-        from json import dumps
+        """Pretty print of basic_info_dict"""
+
         print(dumps(self.basic_info_dict, indent=3))
 
     def download_photo(self, custom_path=DEFAULT_DOWNLOAD_PATH):
-        # Download photo
-        # then name them corresponding to self.basic_info_dict['Name']
-        # Use attributes self.dir_photo_url
-        if isinstance(self.dir_photo_url, str):
+        """Download photo from given url custom_path/Photo name 
+        If no name is available, the photo is named after its ID instead
+        """
+        
+        if self.basic_info_dict['Direct photo url']:
             http = urllib3.PoolManager()
-            response = http.request('GET', self.dir_photo_url, headers=HEADERS)
+            response = http.request('GET', self.basic_info_dict['Direct photo url'], headers=HEADERS)
             if response.status == 200:
                 file_type = response.headers['Content-Type'].split('/')[-1]
 
-                fname_path = ''
-                if self.basic_info_dict['Name'] == '':
-                    fname_path = (DEFAULT_DOWNLOAD_PATH +
-                                  self.basic_info_dict['Id'])
+                if self.basic_info_dict['Name']:
+                    fname_path = os.path.join(custom_path,
+                                              self.basic_info_dict['Name'].replace(" ", "_"))
                 else:
-                    fname_path = (DEFAULT_DOWNLOAD_PATH +
-                                  self.basic_info_dict['Name'])
+                    fname_path = os.path.join(custom_path,
+                                              self.basic_info_dict['Id'])
 
-                with open(fname_path+'.'+file_type, 'wb') as f:
+                photo_path = ''.join([fname_path, '.', file_type])
+                with open(photo_path, 'wb') as f:
                     f.write(response.data)
-
-                return True
-
-            else:
-                print('Dir photo url is missing or invalid')
-                return False
-
+                    print(f"Photo downloaded to {photo_path}")
         else:
             print('Dir photo url is missing or invalid')
-            return False
 
 
 if __name__ == '__main__':
