@@ -12,6 +12,8 @@
 
 A Python library to scrap from [KnowYourMeme](https://knowyourmeme.com/). Written in Python 3.7!
 
+__Currently working on Python 3.7, 3.8__
+
 ## How to set up this library?
 
 Before setting up this library, it is recommended to checkout this file `PerceiveYourMeme/CONST.py`, there are 2 constants you may want to modify.
