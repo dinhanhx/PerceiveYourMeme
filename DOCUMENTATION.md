@@ -7,6 +7,7 @@ A poor documentation of PerceiveYourMeme. Checkout [`EXAMPLE.py`](EXAMPLE.py) fo
 - [MemePage](#MemePage)
 - [PhotoPage](#PhotoPage)
 - [NewsPage](#NewsPage)
+- [VideoPage](#VideoPage)
 - [SearchEngine](#SearchEngine)
 - [SearchEntry](#SearchEntry)
 - [SearchImage](#SearchImage)
@@ -96,6 +97,13 @@ random_news.pprint()
 
 random_news.download_head_img()
 # Download head image
+```
+
+## VideoPage
+
+```Python
+western_animation = pym.VideoPage('https://knowyourmeme.com/videos/225020-western-animation')
+  western_animation.pprint()
 ```
 
 ## SearchEngine
