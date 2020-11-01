@@ -12,8 +12,6 @@
 
 A Python library to scrap from [KnowYourMeme](https://knowyourmeme.com/). Written in Python 3.7!
 
-__Currently working on Python 3.7, 3.8__
-
 ## How to set up this library?
 
 Before setting up this library, it is recommended to checkout this file `PerceiveYourMeme/CONST.py`, there are 2 constants you may want to modify.
@@ -45,6 +43,10 @@ Since I am too busy to checkout at [readthedocs](https://readthedocs.org/), so p
 - For entertaining purposes such as a discord meme bot (TBH Reddit is still better source for getting memes)
 
 If you use this library for different purposes from mentioned one, it is recommended to add your purposes and links to your project to this section.
+
+## Known issues
+- Chance of being bans from KnowYourMeme [Issue #6](https://github.com/dinhanhx/PerceiveYourMeme/issues/6)
+- Randomly failling when testing with Travis-CI [Issue #15](https://github.com/dinhanhx/PerceiveYourMeme/issues/15)
 
 ## Ascii art
 ```
