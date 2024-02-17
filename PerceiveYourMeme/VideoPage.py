@@ -11,8 +11,8 @@ def isValid(url):
         http = urllib3.PoolManager()
         response = http.request('GET', url, headers=HEADERS)
 
-        return response.status == 200
-    return False
+        return response.status == 200, response
+    return False, None
 
 
 class VideoPage():
@@ -22,18 +22,14 @@ class VideoPage():
         # Contains all basic information about the video
         self.basic_info_dict = {}
 
-        if isValid(url):
+        valid, _ = isValid(url)
+        if valid:
             self.basic_info_dict['Original url'] = url
 
             # Get name and id of video from url
             id_name = url.split('/')[-1].split('-')
             self.basic_info_dict['Id'] = id_name[0]
             self.basic_info_dict['Name'] = ' '.join(id_name[1:])
-
-            # Get soup
-            http = urllib3.PoolManager()
-            response = http.request('GET', url, headers=HEADERS)
-            soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
     def pprint(self):
         """Pretty print of self.basic_info_dict"""

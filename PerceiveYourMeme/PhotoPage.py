@@ -14,8 +14,8 @@ def isValid(url):
     if 'https://knowyourmeme.com/photos/' in url:
         http = urllib3.PoolManager()
         response = http.request('GET', url, headers=HEADERS)
-        return response.status == 200
-    return False
+        return response.status == 200, response
+    return False, None
 
 
 class PhotoPage():
@@ -24,7 +24,8 @@ class PhotoPage():
     def __init__(self, url):
         self.basic_info_dict = {}
 
-        if isValid(url):
+        valid, response = isValid(url)
+        if valid:
             # Store Photo url
             self.basic_info_dict['Original url'] = url
 
@@ -34,8 +35,6 @@ class PhotoPage():
             self.basic_info_dict['Name'] = ' '.join(id_name[1:])
 
             # Get soup. Can be slow due to internet speeds
-            http = urllib3.PoolManager()
-            response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
             # Get direct url of photo

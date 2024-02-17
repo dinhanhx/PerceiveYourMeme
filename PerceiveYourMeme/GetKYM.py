@@ -43,7 +43,7 @@ def get_memes(directory = '', page_index = 1, sort = ''):
     soup = get_soup(url)
 
     tag_a_list = soup.find('table', attrs={'class':'entry_list'}).find_all('a', attrs={'class':'photo'})
-    url_list = [KYM+tag_a['href'] for tag_a in tag_a_list]
+    url_list = [tag_a['href'] for tag_a in tag_a_list]
 
     return [MemePage(u_r_l) for u_r_l in url_list]
 
@@ -82,7 +82,7 @@ def get_news(page_index = 1):
 
     soup = get_soup(url)
 
-    url_list = ['https:'+h1.find('a')['href'] for h1 in soup.find('div', attrs = {'id': 'maru'}).find_all('div')[1].find_all('h1')]
+    url_list = [h1.find('a')['href'] for h1 in soup.find('div', attrs = {'id': 'maru'}).find_all('div')[1].find_all('h1')]
     url_list = [u_r_l.replace(':443', '') for u_r_l in url_list]
 
     return [NewsPage(u_r_l) for u_r_l in url_list]
