@@ -10,16 +10,17 @@ def isValid(url):
     if 'https://knowyourmeme.com/memes/' in url:
         http = urllib3.PoolManager()
         response = http.request('GET', url, headers=HEADERS)
-        return response.status == 200
+        return response.status == 200, response
 
     else:
-        return False
+        return False, None
 
 
 class MemePage():
     # An object to store basic information and template of a meme
     def __init__(self, url):
-        if isValid(url):
+        valid, response = isValid(url)
+        if valid:
             self.basic_info_dict = {}
             # Store Meme url
             self.basic_info_dict['Meme url'] = url
@@ -28,8 +29,6 @@ class MemePage():
             self.basic_info_dict['Name'] = url.split('/')[-1].replace('-', ' ')
 
             # Get the html document. This can be slow due to the internet
-            http = urllib3.PoolManager()
-            response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
             try:
                 entry_body = soup.find('div',

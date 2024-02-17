@@ -117,9 +117,8 @@ class SearchNews():
 
             entries = soup.find('div', attrs={"id": "entries"})
             headers1 = entries.find_all('div')[1].find_all('h1')
-            url_list = ['https:' + h1.find('a')['href'] for h1 in headers1]
+            url_list = [KYM + h1.find('a')['href'] for h1 in headers1]
             url_list = [u_r_l.replace(':443', '') for u_r_l in url_list]
-            print(url_list)
             NewsPageList.append([NewsPage(u_r_l) for u_r_l in url_list])
 
         self.NewsPageList = NewsPageList

@@ -7,25 +7,24 @@ except ImportError:
 
 
 def isValid(url):
-    if 'https://news.knowyourmeme.com/news' in url:
+    if 'https://knowyourmeme.com/news' in url:
         http = urllib3.PoolManager()
         response = http.request('GET', url, headers=HEADERS)
-        return response.status == 200
+        return response.status == 200, response
     else:
-        return False
+        return False, None
 
 
 class NewsPage():
     # An object to store a news articles
     def __init__(self, url):
-        if isValid(url):
+        valid, response = isValid(url)
+        if valid:
             self.info_dict = {}
             # Store News url
             self.info_dict['News url'] = url
 
             # Get the html document. This can be slow due to the internet
-            http = urllib3.PoolManager()
-            response = http.request('GET', url, headers=HEADERS)
             soup = bs4.BeautifulSoup(response.data, 'html.parser')
 
             try:
@@ -44,7 +43,7 @@ class NewsPage():
                 # Get the heading img
                 maru = soup.find('div', attrs={'id': 'maru'})
                 i = maru.find('img', attrs={'class': 'news-post-header-image'})
-                self.head_img_url = i['data-src']
+                self.head_img_url = i['src']
 
                 # Store url to info_dict
                 self.info_dict['Head image url'] = self.head_img_url
@@ -90,7 +89,7 @@ class NewsPage():
             return False
 
 if __name__ == '__main__':
-    random_news = NewsPage('https://news.knowyourmeme.com/news/'
+    random_news = NewsPage('https://knowyourmeme.com/news/'
                            'mia-khalifa-is-auctioning-iconic-porn-'
                            'glasses-to-raise-money-for-beirut')
     random_news.pprint()

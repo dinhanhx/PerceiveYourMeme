@@ -15,7 +15,7 @@ def runner():
     OneRace.pprint()
     OneRace.download_photo()
 
-    Mia = pym.NewsPage('https://news.knowyourmeme.com/news/mia-khalifa-is-auctioning-iconic-porn-glasses-to-raise-money-for-beirut')
+    Mia = pym.NewsPage('https://knowyourmeme.com/news/mia-khalifa-is-auctioning-iconic-porn-glasses-to-raise-money-for-beirut')
     Mia.pprint()
     Mia.download_head_img()
 
